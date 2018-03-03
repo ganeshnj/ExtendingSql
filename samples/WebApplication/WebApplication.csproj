@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ExtendSql\ExtendSql.csproj" />
+    <ProjectReference Include="..\..\src\ExtendSql\ExtendSql.csproj" />
   </ItemGroup>
 
 </Project>
