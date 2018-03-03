@@ -62,7 +62,7 @@ namespace WebApplication.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Title,Content,CreatedOn")] CreatePostViewModel createPostViewModel)
+        public async Task<IActionResult> Create([Bind("Title,Content,CreatedOn,Subtitle")] CreatePostViewModel createPostViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -78,6 +78,17 @@ namespace WebApplication.Controllers
                     };
                     post.Metas.Add(createdOnMeta);
                 }
+
+                if (createPostViewModel.Subtitle != null)
+                {
+                    var subtitleMeta = new PostMeta()
+                    {
+                        Key = nameof(CreatePostViewModel.Subtitle),
+                        Value = createPostViewModel.Subtitle
+                    };
+                    post.Metas.Add(subtitleMeta);
+                }
+
                 _context.Add(post);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -109,7 +120,7 @@ namespace WebApplication.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,CreatedOn,CreatedOnMeta")] EditPostViewModel editPostViewModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,CreatedOn,CreatedOnMeta,Subtitle,SubtitleMeta")] EditPostViewModel editPostViewModel)
         {
             if (id != editPostViewModel.Id)
             {
@@ -122,6 +133,9 @@ namespace WebApplication.Controllers
  
                 var createdOnMeta = _mapper.Map<PostMeta>(editPostViewModel.CreatedOnMeta);
                 post.Metas.Add(createdOnMeta);
+
+                var subtitleMeta = _mapper.Map<PostMeta>(editPostViewModel.SubtitleMeta);
+                post.Metas.Add(subtitleMeta);
 
                 try
                 {

@@ -17,11 +17,8 @@ namespace WebApplication.Models.PostViewModels
             {
                 if (_createdOn == null)
                 {
-                    if (Metas != null)
-                    {
-                        DateTime.TryParse(CreatedOnMeta.Value, out DateTime createdOn);
-                        _createdOn = createdOn;
-                    }
+                    DateTime.TryParse(CreatedOnMeta.Value, out DateTime createdOn);
+                    _createdOn = createdOn;
                 }
                 return _createdOn;
             }
@@ -59,6 +56,57 @@ namespace WebApplication.Models.PostViewModels
                         PostId = value.PostId,
                         Key = nameof(CreatedOn),
                         Value = CreatedOn.ToString()
+                    };
+                }
+            }
+        }
+
+        private string _subtitle { get; set; }
+        public string Subtitle
+        {
+            get
+            {
+                if (_subtitle == null)
+                {
+                    _subtitle = SubtitleMeta?.Value;
+                }
+
+                return _subtitle;
+            }
+            set
+            {
+                if (_subtitle != value)
+                {
+                    _subtitle = value;
+                }
+            }
+        }
+
+        private PostMetaViewModel _subtitleMeta { get; set; }
+        public PostMetaViewModel SubtitleMeta
+        {
+            get
+            {
+                if (_subtitleMeta == null)
+                {
+                    if (Metas != null)
+                    {
+                        _subtitleMeta = Metas.FirstOrDefault(cm => cm.Key == nameof(Subtitle));
+                    }
+                }
+
+                return _subtitleMeta;
+            }
+            set
+            {
+                if (_subtitleMeta != value)
+                {
+                    _subtitleMeta = new PostMetaViewModel()
+                    {
+                        Id = value.Id,
+                        PostId = value.PostId,
+                        Key = nameof(Subtitle),
+                        Value = Subtitle
                     };
                 }
             }

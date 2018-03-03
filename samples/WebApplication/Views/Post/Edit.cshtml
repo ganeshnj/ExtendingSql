@@ -24,11 +24,18 @@
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="hidden" asp-for="CreatedOnMeta.Id" value="@Model.CreatedOnMeta?.Id"/>
+                <input type="hidden" asp-for="CreatedOnMeta.Id" value="@Model.CreatedOnMeta?.Id" />
                 <input type="hidden" asp-for="CreatedOnMeta.PostId" value="@Model.CreatedOnMeta?.PostId" />
                 <label asp-for="CreatedOn" class="control-label"></label>
                 <input asp-for="CreatedOn" class="form-control" />
                 <span asp-validation-for="CreatedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="hidden" asp-for="SubtitleMeta.Id" value="@Model.SubtitleMeta?.Id" />
+                <input type="hidden" asp-for="SubtitleMeta.PostId" value="@Model.SubtitleMeta?.PostId" />
+                <label asp-for="Subtitle" class="control-label"></label>
+                <input asp-for="Subtitle" class="form-control" />
+                <span asp-validation-for="Subtitle" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />

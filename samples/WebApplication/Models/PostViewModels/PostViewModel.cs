@@ -35,6 +35,30 @@ namespace WebApplication.Models.PostViewModels
             }
         }
 
+        private string _subtitle = null;
+        public string Subtitle
+        {
+            get
+            {
+                if (_subtitle == null)
+                {
+                    var subtitleMeta = Metas.FirstOrDefault(cm => cm.Key == nameof(Subtitle));
+                    if (subtitleMeta != null)
+                    {
+                        _subtitle = subtitleMeta.Value;
+                    }
+                }
+                return _subtitle;
+            }
+            set
+            {
+                if (_subtitle != value)
+                {
+                    _subtitle = value;
+                }
+            }
+        }
+
         public List<PostMetaViewModel> Metas { get; set; }
     }
 }
